@@ -4,6 +4,7 @@ import com.productmicroservice.productmicroservice.DTO.ProductDto;
 import com.productmicroservice.productmicroservice.Model.Product;
 import com.productmicroservice.productmicroservice.Service.ProductService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
+@Validated
 public class ProductController {
 
     private final ProductService productService;
