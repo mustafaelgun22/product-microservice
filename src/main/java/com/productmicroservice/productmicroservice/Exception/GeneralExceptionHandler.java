@@ -12,4 +12,9 @@ public class GeneralExceptionHandler {
     public ResponseEntity<?> handle(ProductNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ProductBarcodeNotFound.class)
+    public ResponseEntity<?> handle(ProductBarcodeNotFound exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

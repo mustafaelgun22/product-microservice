@@ -1,7 +1,8 @@
 package com.productmicroservice.productmicroservice.Model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Optional;
 
 @Entity
 @Table(name = "product")
@@ -16,6 +17,17 @@ public class Product {
 
     @Column(name="price")
     private Double price;
+
+    @Column(name="barcode",unique = true)
+    private Long barcode;
+
+    public void setBarcode(Long barcode) {
+        this.barcode = barcode;
+    }
+
+    public Long getBarcode() {
+        return barcode;
+    }
 
     public Long getId() {
         return id;

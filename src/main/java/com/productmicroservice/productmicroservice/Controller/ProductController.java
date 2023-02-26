@@ -1,5 +1,6 @@
 package com.productmicroservice.productmicroservice.Controller;
 
+import com.productmicroservice.productmicroservice.DTO.ProductDetailDto;
 import com.productmicroservice.productmicroservice.DTO.ProductDto;
 import com.productmicroservice.productmicroservice.Model.Product;
 import com.productmicroservice.productmicroservice.Service.ProductService;
@@ -40,4 +41,10 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
         return ResponseEntity.ok(productService.getProductById(id));
     }
+
+    @GetMapping("/barcode/{barcode}/")
+    public ResponseEntity<ProductDetailDto> getProductByBarcode(@PathVariable Long barcode){
+        return ResponseEntity.ok(productService.getProductByBarcode(barcode));
+    }
+
 }

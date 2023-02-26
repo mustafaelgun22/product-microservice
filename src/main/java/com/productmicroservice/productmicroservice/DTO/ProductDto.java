@@ -1,7 +1,5 @@
 package com.productmicroservice.productmicroservice.DTO;
 
-import com.productmicroservice.productmicroservice.Model.Product;
-
 public class ProductDto {
     private String  name;
     private double price;
