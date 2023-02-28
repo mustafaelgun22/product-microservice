@@ -17,4 +17,9 @@ public class GeneralExceptionHandler {
     public ResponseEntity<?> handle(ProductBarcodeNotFound exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ProductValidationError.class)
+    public ResponseEntity<?> handle(ProductValidationError exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

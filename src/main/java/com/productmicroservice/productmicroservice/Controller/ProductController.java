@@ -7,7 +7,6 @@ import com.productmicroservice.productmicroservice.Service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -24,13 +23,14 @@ public class ProductController {
     }
 
     @PostMapping(value = "/create/")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product){
-            productService.createProduct(product);
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(product.getId())
-                .toUri();
-            return ResponseEntity.created(location).build();
+    public ResponseEntity<ProductDto> createProduct(@RequestBody Product product){
+            productService.productControl(product);
+            Product created_product=productService.createProduct(product);
+            return ResponseEntity.created(null)
+                .body(new ProductDto(
+                        created_product.getName(),
+                        created_product.getPrice(),
+                        created_product.getBarcode()));
     }
     @GetMapping(value = "/get_all_products/")
     public ResponseEntity<List<ProductDto>> getAllProducts(){
