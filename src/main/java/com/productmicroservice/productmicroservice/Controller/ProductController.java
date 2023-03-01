@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class ProductController {
 
     @PostMapping(value = "/create/")
     public ResponseEntity<ProductDto> createProduct(@RequestBody Product product){
-            productService.productControl(product);
+            productService.getProductByBarcodeCheck(product.getBarcode());
             Product created_product=productService.createProduct(product);
             return ResponseEntity.created(null)
                 .body(new ProductDto(

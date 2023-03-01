@@ -2,14 +2,13 @@ package com.productmicroservice.productmicroservice.Service;
 
 import com.productmicroservice.productmicroservice.DTO.ProductDetailDto;
 import com.productmicroservice.productmicroservice.DTO.ProductDto;
+import com.productmicroservice.productmicroservice.Exception.ProductBarcodeExists;
 import com.productmicroservice.productmicroservice.Exception.ProductBarcodeNotFound;
 import com.productmicroservice.productmicroservice.Exception.ProductNotFoundException;
-import com.productmicroservice.productmicroservice.Exception.ProductValidationError;
 import com.productmicroservice.productmicroservice.Model.Product;
 import com.productmicroservice.productmicroservice.Repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,23 +48,9 @@ public class ProductService {
                 .orElseThrow(()-> new ProductBarcodeNotFound("Product barcode does not exists"));
     }
 
-    public void productControl(Product product){
-        List<String> errors = new ArrayList<>();
-        if(product.getName() == null || product.getName().isEmpty()){
-            errors.add("Name is missing");
-        }
-        if(product.getPrice() == null || product.getPrice().isNaN()){
-            errors.add("Price is missing");
-        }
-        if(product.getBarcode() == null || product.getBarcode().describeConstable().isEmpty()){
-            errors.add("Barcode is missing");
-        }
-        if(product.getBarcode() != null && !repository.findByBarcode(product.getBarcode()).isEmpty()){
-            errors.add("barcode value must be unique");
-        }
-        if(!errors.isEmpty()){
-            String errorMessages = String.join(", ", errors);
-            throw new ProductValidationError(errorMessages);
+    public void getProductByBarcodeCheck(Long barcode){
+        if(!repository.findByBarcode(barcode).isEmpty()){
+            throw new ProductBarcodeExists("There is a product in this barcode");
         }
     }
 }

@@ -2,8 +2,6 @@ package com.productmicroservice.productmicroservice.Model;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
-
 @Entity
 @Table(name = "product")
 public class Product {
@@ -12,13 +10,13 @@ public class Product {
     @Column(insertable = false)
     private Long id;
 
-    @Column(name="name")
+    @Column(name="name",nullable = false)
     private String name;
 
-    @Column(name="price")
+    @Column(name="price",nullable = false)
     private Double price;
 
-    @Column(name="barcode",unique = true)
+    @Column(name="barcode",unique = true,nullable = false)
     private Long barcode;
 
     public void setBarcode(Long barcode) {
