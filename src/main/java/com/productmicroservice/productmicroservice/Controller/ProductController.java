@@ -4,6 +4,8 @@ import com.productmicroservice.productmicroservice.DTO.ProductDetailDto;
 import com.productmicroservice.productmicroservice.DTO.ProductDto;
 import com.productmicroservice.productmicroservice.Model.Product;
 import com.productmicroservice.productmicroservice.Service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.List;
 @RequestMapping("/v1/product")
 @Validated
 public class ProductController {
+
+    Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
 
@@ -38,6 +42,7 @@ public class ProductController {
 
     @GetMapping(value = "/{id}/")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id){
+        logger.info("Product requested by id"+id);
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
